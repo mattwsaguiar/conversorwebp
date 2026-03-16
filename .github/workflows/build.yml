@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Baixar repositório
+      - name: Baixar repositorio
         uses: actions/checkout@v4
 
       - name: Instalar Python
@@ -18,13 +18,15 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Instalar dependências
-        run: |
-          pip install pillow pyinstaller
+      - name: Instalar dependencias
+        run: pip install pillow pyinstaller
 
       - name: Gerar EXE
-        run: |
-          pyinstaller --onefile --windowed --name "WebP Converter" webp_converter.py
+        run: pyinstaller --onefile --windowed --name WebPConverter webp_converter.py
 
-      - name: Publicar EXE como artefato
+      - name: Publicar EXE
         uses: actions/upload-artifact@v4
+        with:
+          name: WebPConverter-Windows
+          path: dist/WebPConverter.exe
+          retention-days: 30
